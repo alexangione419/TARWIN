@@ -5,7 +5,7 @@
 RH_ASK rf_driver;
 
 int ledState1 = LOW;
-int ledState2= LOW;
+int ledState2 = LOW;
 int ledState3 = LOW;
 int ledState4 = LOW;
 
@@ -21,7 +21,6 @@ int GreenPin = 9;
 int BluePin = 10; 
 
 void setup() {
-  // put your setup code here, to run once:
   pinMode(RedPin, OUTPUT);
   pinMode(GreenPin, OUTPUT);
   pinMode(BluePin, OUTPUT);
@@ -36,19 +35,15 @@ void setup() {
 }
 
 void loop() {
-
   uint8_t buf[3];
   uint8_t buflen = sizeof(buf);
-  if (rf_driver.recv(buf, &buflen))
-    {
+  if (rf_driver.recv(buf, &buflen)){
      Serial.println((char*)buf); 
      if(!(strcmp(((char*)buf), "gre"))){
         ledState1 = !ledState1;
         toBuzzg = !toBuzzg;
         Serial.println("green");
         green();
-        
- 
       }
       if(!(strcmp(((char*)buf), "blu"))){
         ledState2 = !ledState2;
@@ -61,7 +56,6 @@ void loop() {
         toBuzzy = !toBuzzy;
         Serial.println("ytellow");
         yellow();
-
       }
       if(!(strcmp(((char*)buf), "red"))){
         ledState4 = !ledState4;
@@ -95,8 +89,8 @@ void yellow () {
       noTone(buzzerPin);
    }
   //set the LED pins to values that make yellow
-  
 }
+
 void green () {
     digitalWrite(RedPin, LOW);
     digitalWrite(GreenPin, ledState1);
@@ -107,9 +101,8 @@ void green () {
     noTone(buzzerPin);
   }
   //set the LED pins to values that make green
-    
- 
 }
+
 void blue () {
   digitalWrite(RedPin, LOW);
   digitalWrite(GreenPin, LOW);
@@ -120,5 +113,4 @@ void blue () {
     noTone(buzzerPin);
   }
   //set the LED pins to values that make blue
-  
 }
